@@ -15,7 +15,18 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->integer('users_id');
+            $table->integer('post_categories_id');
+//            $table->foreign('users_id')->references('id')->on('users');
+//            $table->foreign('post_categories_id')->references('id')->on('post_categories');
+            $table->string('post_categories');
+            $table->string('post_title');
+            $table->string('post_details');
+            $table->boolean('sell_or_buy');
+            $table->integer('price');
+            $table->timestamp('created_at')->useCurrent();
+//            $table->timestamp('expire_at')->useCurrent() ;
+//            $table->timestamps();
         });
     }
 
