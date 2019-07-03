@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "laravel-echo": "^1.5.4",
+        "laravel-mix": "^4.0.16",
         "pusher-js": "^4.4.0"
     }
 }

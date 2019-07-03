@@ -6,16 +6,19 @@
         <thead>
           <tr>
             <th>ID</th>
+            <th>Role</th>
             <th>Name</th>
             <th>Email</th>
+            <th>created At</th>
+            <th>updated At</th>
           </tr>
         </thead>
         <tbody>
         @if($users)
                 @foreach($users as $user)
                   <tr>
-                    <td>{{$user->id}}</td>
-
+                      <td>{{$user->id}}</td>
+                      <td>{{$user->role->name}}</td>
                       <td>{{$user->name}}</td>
                       <td>{{$user->email}}</td>
                       <td>{{$user->created_at}}</td>
@@ -27,4 +30,4 @@
     </table>
 
 @stop
-{{--<h1>working</h1>--}}
+
