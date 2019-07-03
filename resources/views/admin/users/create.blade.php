@@ -29,11 +29,11 @@
         {!! Form::password('password',['class'=>'form-control']) !!}
     </div>
 
-    <div class="form-group">
+{{--    <div class="form-group">--}}
 
-        {!! Form::label('title','Title') !!}
-        {!! Form::label('title',null,['class'=>'form-control']) !!}
-    </div>
+{{--        {!! Form::label('title','Title') !!}--}}
+{{--        {!! Form::label('title',null,['class'=>'form-control']) !!}--}}
+{{--    </div>--}}
 
     <div class="form-group">
         {!! Form::submit('Create post',['class'=>'btn  btn-primary']) !!}
@@ -41,6 +41,9 @@
 
 
     {!! Form::close() !!}
+
+
+    @include('includes.form_error')
 
     @stop
 
