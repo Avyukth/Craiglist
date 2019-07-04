@@ -30,3 +30,5 @@ Route::resource('admin/users','AdminUserController');
 //    Route::resource('admin/users','AdminUserController');
 //
 //});
+
+Route::resource('admin/posts','AdminPostController');

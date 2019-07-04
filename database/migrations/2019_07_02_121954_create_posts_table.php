@@ -15,17 +15,15 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('users_id');
-            $table->integer('post_categories_id');
-//            $table->foreign('users_id')->references('id')->on('users');
-//            $table->foreign('post_categories_id')->references('id')->on('post_categories');
-            $table->string('post_categories');
-            $table->string('post_title');
-            $table->string('post_details');
-            $table->boolean('sell_or_buy');
-            $table->integer('price');
+            $table->integer('users_id')->unsigned()->index()->default(1);
+            $table->integer('category_id')->unsigned()->index();
+            $table->integer('photo_id')->unsigned()->index();
+            $table->string('title');
+            $table->text('body');
+            $table->boolean('sell_or_buy')->default(false);
+            $table->integer('price')->default(0);
             $table->timestamp('created_at')->useCurrent();
-//            $table->timestamp('expire_at')->useCurrent() ;
+            $table->timestamp('updated_at')->useCurrent() ;
 //            $table->timestamps();
         });
     }
