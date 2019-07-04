@@ -41,7 +41,9 @@ class AdminUserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        return $request->all();
+        User::create($request->all());
+        return redirect('admin/users');
+
 //        return view('admin.users.index', compact('users'));
 
     }
