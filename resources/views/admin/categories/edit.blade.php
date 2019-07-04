@@ -1,55 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1> Edit user</h1>
-    {!! Form::model($user,['method'=>'PATCH','action'=>['AdminUserController@update', $user->id],'files'=>true]) !!}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Create Category</div>
+
+                    <div class="card-body">
+
+                        {!! Form::model($categories,['method'=>'PATCH','action'=>['AdminCategoryController@update', $categories->id]]) !!}
+
+                        <div class="form-group">
+
+                            {!! Form::text('category_type',null,['class'=>'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::submit('Modify Category',['class'=>'btn  btn-primary col-sm-6']) !!}
+                        </div>
 
 
-    <div class="form-group">
+                        {!! Form::close() !!}
 
-        {!! Form::label('name','Name') !!}
-        {!! Form::text('name',null,['class'=>'form-control']) !!}
+                        {!! Form::open(['method'=>'DELETE','action'=>['AdminCategoryController@destroy',$categories->id],'class'=>'pull-right']) !!}
+
+
+                        <div class="form-group">
+                            {!! Form::submit('Delete  Category',['class'=>'btn  btn-danger col-sm-6']) !!}
+                        </div>
+
+
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-
-        {!! Form::label('email','Email') !!}
-        {!! Form::email('email',null,['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-
-        {!! Form::label('role_id','Role:') !!}
-        {!! Form::select('role_id',$roles,null,['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-
-        {!! Form::label('mobile','Mobile') !!}
-        {!! Form::text('mobile_no',null,['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-
-        {!! Form::label('password','Password') !!}
-        {!! Form::password('password',['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-
-        {!! Form::label('photo_id','Photo') !!}
-        {!! Form::file('photo_id',null,['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::submit('Create post',['class'=>'btn  btn-primary']) !!}
-    </div>
-
-
-    {!! Form::close() !!}
-
-
-    @include('includes.form_error')
-
 @stop
 
