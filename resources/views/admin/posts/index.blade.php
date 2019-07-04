@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <h1>posts</h1>
@@ -11,6 +11,8 @@
             <th>Photo</th>
             <th>Title</th>
             <th>Body</th>
+            <th>SELL/BUY</th>
+            <th>Price</th>
             <th>created At</th>
             <th>updated At</th>
         </tr>
@@ -22,10 +24,12 @@
                     <td>{{$post->id}}</td>
                     <td>{{$post->user->name}}</td>
                     <td>{{$post->category->category_type}}</td>
-{{--                    <td>{{$post->photo_id}}</td>--}}
                     <th><img height ="50" src="{{$post->photo ? $post->photo->file : 'no user photo'}}"></th>
-                    <td>{{$post->title}}</td>
+                    <td><a href="{{route('posts.edit',$post->id)}}">{{$post->title}}</a></td>
+{{--                    <td>{{$post->title}}</td>--}}
                     <td>{{$post->body}}</td>
+                    <td>{{$post->sell_or_buy ? 'Sell' : 'Buy'}}</td>
+                    <td>{{$post->price}}</td>
                     <td>{{$post->created_at}}</td>
                     <td>{{$post->updated_at}}</td>
                 </tr>

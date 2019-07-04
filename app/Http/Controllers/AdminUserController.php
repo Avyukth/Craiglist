@@ -125,7 +125,7 @@ class AdminUserController extends Controller
             $photo=Photo::create(['file'=>$name]);
             $input['photo_id']=$photo->id;
         }
-        User::create($input);
+        $user->update($input);
 
         return redirect('admin/users');
 

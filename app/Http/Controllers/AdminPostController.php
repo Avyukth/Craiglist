@@ -81,7 +81,11 @@ class AdminPostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $posts = post::findOrFail($id);
+        $category=postCategory::pluck('category_type','id')->all();
+        return view('admin.posts.edit', compact('posts','category'));
+//        return view('admin.posts.edit');
+
     }
 
     /**
@@ -93,7 +97,21 @@ class AdminPostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = post::findOrFail($id);
+
+        $input = $request->all();
+        if($file=$request->file('photo_id')){
+
+            $name=time() . $file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo=Photo::create(['file'=>$name]);
+            $input['photo_id']=$photo->id;
+//            return "photo exists";
+        }
+
+        $post->update($input);
+
+        return redirect('admin/posts');
     }
 
     /**
@@ -104,6 +122,9 @@ class AdminPostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post=post::findOrFail($id);
+        unlink(public_path() . $post->photo->file);
+        $post->delete();
+        return redirect('/admin/posts');
     }
 }
