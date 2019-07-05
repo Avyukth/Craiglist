@@ -26,11 +26,12 @@ Route::get('/admin', function (){
 Route::resource('admin/users','AdminUserController');
 
 
-//Route::group(['middleware'=>'admin'],function(){
-//    Route::resource('admin/users','AdminUserController');
-//
-//});
+Route::group(['middleware'=>'admin'],function(){
+    Route::resource('admin/users','AdminUserController');
+    Route::resource('admin/categories','AdminCategoryController');
+
+
+});
 
 Route::resource('admin/posts','AdminPostController');
-Route::resource('admin/categories','AdminCategoryController');
 
