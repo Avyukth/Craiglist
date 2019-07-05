@@ -7,7 +7,10 @@ use App\Http\Requests\UserCreateRequest;
 use App\Photo;
 use App\post;
 use App\postCategory;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 //use PhpParser\Node\Expr\PostDec;
 
 class AdminPostController extends Controller
@@ -47,15 +50,18 @@ class AdminPostController extends Controller
     public function store(PostCreateRequest $request)
     {
         $input = $request->all();
-        if($file=$request->file('photo_id')){
+        if((Auth::user()!=null) ) {
 
-            $name=time() . $file->getClientOriginalName();
-            $file->move('images',$name);
-            $photo=Photo::create(['file'=>$name]);
-            $input['photo_id']=$photo->id;
+            if ($file = $request->file('photo_id')) {
+
+                $name = time() . $file->getClientOriginalName();
+                $file->move('images', $name);
+                $photo = Photo::create(['file' => $name]);
+                $input['photo_id'] = $photo->id;
+            }
+
+            post::create($input);
         }
-
-        post::create($input);
 
         return redirect('admin/posts');
 
@@ -80,10 +86,16 @@ class AdminPostController extends Controller
      */
     public function edit($id)
     {
+
         $posts = post::findOrFail($id);
-        $category=postCategory::pluck('category_type','id')->all();
-        return view('admin.posts.edit', compact('posts','category'));
-//        return view('admin.posts.edit');
+
+//        dd(Auth::user());
+        if((Auth::user()!=null) and ($posts->users_id==Auth::user()->id)) {
+            $category = postCategory::pluck('category_type', 'id')->all();
+            return view('admin.posts.edit', compact('posts', 'category'));
+        }
+        return redirect('admin/posts');
+
 
     }
 
