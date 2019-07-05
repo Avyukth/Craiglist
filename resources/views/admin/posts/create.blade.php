@@ -20,8 +20,8 @@
 
                         <div class="form-group">
 
-                            {!! Form::label('user_id','User ID') !!}
-                            {!! Form::text('user_id',null,['class'=>'form-control']) !!}
+                            {!! Form::label('users_id','User ID') !!}
+                            {!! Form::text('users_id',null,['class'=>'form-control']) !!}
                         </div>
 
 

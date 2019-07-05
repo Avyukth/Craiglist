@@ -108,6 +108,8 @@ class AdminPostController extends Controller
         }
         $post->update($input);
         $post->price = $input['price'];
+        $post->users_id = $input['users_id'];
+
         $post->save();
         return redirect('admin/posts');
     }
