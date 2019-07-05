@@ -23,15 +23,40 @@
                 <div class="card-header">Advertisement</div>
 
                 <div class="row justify-content-center">
-                <div class="form-group">
-                    <a href="/admin/posts"><button>Browse</button></a>
-                </div>
+                    <a href="/admin/posts">
+                        <div class="form-group">
+                            {!! Form::submit('Browse Post',['class'=>'btn  btn-primary']) !!}
+                        </div>
+                    </a>
                 </div>
                 <div class="row justify-content-center">
-                <div class="form-group">
-                    <a href="/admin/posts/create"><button>Create</button></a>
+
+                    <a href="/admin/posts/create">
+                        <div class="form-group">
+                            {!! Form::submit('Create Post',['class'=>'btn  btn-primary']) !!}
+                        </div>
+                    </a>
+
                 </div>
+
+                <div class="row justify-content-center">
+
+                    <a href="/admin/categories">
+                        <div class="form-group">
+                            {!! Form::submit('view Post Categories ',['class'=>'btn  btn-primary']) !!}
+                        </div>
+                    </a>
+
                 </div>
+                <div class="row justify-content-center">
+                    <a href="/admin/posts">
+                        <div class="form-group">
+                            {!! Form::submit('Browse post By Categories ',['class'=>'btn  btn-primary']) !!}
+                        </div>
+                    </a>
+                </div>
+
+
                 </div>
             </div>
         </div>

@@ -53,7 +53,6 @@ class AdminPostController extends Controller
             $file->move('images',$name);
             $photo=Photo::create(['file'=>$name]);
             $input['photo_id']=$photo->id;
-//            return "photo exists";
         }
 
         post::create($input);

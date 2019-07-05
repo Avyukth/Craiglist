@@ -36,6 +36,17 @@
                             {!! Form::label('category_id','Post category:') !!}
                             {!! Form::select('category_id',[''=>'']+$category,null,['class'=>'form-control']) !!}
                         </div>
+                        <div class="form-group">
+
+                            {!! Form::label('sellOrBuy','Ad Type:') !!}
+                            {!! Form::select('sellOrBuy',['0'=>'Sell','1'=>'Buy'],['class'=>'form-control']) !!}
+                        </div>
+
+                        <div class="form-group">
+
+                            {!! Form::label('price','Price:') !!}
+                            {!! Form::text('price',null,['class'=>'form-control']) !!}
+                        </div>
 
 
 
