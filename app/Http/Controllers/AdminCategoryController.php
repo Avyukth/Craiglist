@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\post;
 use App\postCategory;
 use Illuminate\Http\Request;
 
@@ -85,6 +85,8 @@ class AdminCategoryController extends Controller
         $categories=postCategory::findOrFail($id);
 //        unlink(public_path() . $categories->posts);?
 //        $categories->posts->delete();
+//        $categories->boot();
+        $deletedRows = post::where('category_id', $id)->delete();
         $categories->delete();
         return redirect('/admin/categories');
     }
