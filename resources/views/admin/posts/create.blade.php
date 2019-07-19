@@ -49,7 +49,6 @@
                         </div>
 
 
-
                         <div class="form-group">
 
                             {!! Form::label('photo_id','Photo') !!}

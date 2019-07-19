@@ -9,7 +9,7 @@
                     <div class="card-header">Sign UP</div>
 
                     <div class="card-body">
-{{--                        <h1> Create user</h1>--}}
+                        {{--                        <h1> Create user</h1>--}}
                         {!! Form::open(['method'=>'POST','action'=>'AdminUserController@store','files'=>true]) !!}
 
 
@@ -65,5 +65,5 @@
         </div>
     </div>
 
-    @stop
+@stop
 

@@ -46,7 +46,7 @@
                     <td>{{$post->id}}</td>
                     <td>{{$post->user->name}}</td>
                     <td>{{$post->category->category_type}}</td>
-                    <th><img height ="50" src="{{$post->photo ? $post->photo->file : 'no user photo'}}"></th>
+                    <th><img height="50" src="{{$post->photo ? $post->photo->file : 'no user photo'}}"></th>
                     <td><a href="{{route('posts.edit',$post->id)}}">{{$post->title}}</a></td>
                     {{--                    <td>{{$post->title}}</td>--}}
                     <td>{{$post->body}}</td>

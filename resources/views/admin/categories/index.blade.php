@@ -13,7 +13,7 @@
 
                         <div class="form-group">
 
-{{--                            {!! Form::label('title','Title') !!}--}}
+                            {{--                            {!! Form::label('title','Title') !!}--}}
                             {!! Form::text('category_type',null,['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
@@ -30,7 +30,7 @@
                     <div class="card-header">List Of Category</div>
 
                     <div class="card-body">
-{{--                        <h1>category</h1>--}}
+                        {{--                        <h1>category</h1>--}}
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -43,8 +43,10 @@
                                 @foreach($categories as $category)
                                     <tr>
                                         <td>{{$category->id}}</td>
-{{--                                        <td>{{$category->category_type}}</td>--}}
-                                        <td><a href="{{route('categories.edit',$category->id)}}">{{$category->category_type}}</a></td>
+                                        {{--                                        <td>{{$category->category_type}}</td>--}}
+                                        <td>
+                                            <a href="{{route('categories.edit',$category->id)}}">{{$category->category_type}}</a>
+                                        </td>
 
                                     </tr>
                                 @endforeach

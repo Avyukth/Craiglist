@@ -15,12 +15,12 @@ class SearchPostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index',compact('posts'));
+//        return view('admin.posts.index',compact('posts'));
 //        return 'l';
 
-            $q = Input::get ( 'q' );
-
-            dd($q);
+//            $q = Input::get ( 'q' );
+//
+//            dd($q);
 //            $posts = post::where('title','LIKE','%'.$q.'%')->orWhere('body','LIKE','%'.$q.'%')->get();
 //
 ////    dd($posts);

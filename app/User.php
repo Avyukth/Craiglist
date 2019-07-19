@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'mobile_no','email', 'password','role_id','photo_id'
+        'name', 'mobile_no', 'email', 'password', 'role_id', 'photo_id'
     ];
 
     /**
@@ -37,25 +36,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo('App\Role');
     }
 
-    public function photo(){
+    public function photo()
+    {
         return $this->belongsTo('App\Photo');
     }
 
-    public  function isAdmin(){
-        if ($this->role->name=='administrator'){
+    public function isAdmin()
+    {
+        if ($this->role->name == 'administrator') {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
 
-    public function post(){
+    public function post()
+    {
         return $this->hasMany('App\post');
     }
 }

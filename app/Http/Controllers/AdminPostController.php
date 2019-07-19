@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostCreateRequest;
-use App\Http\Requests\UserCreateRequest;
 use App\Photo;
 use App\post;
 use App\postCategory;
-use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 //use PhpParser\Node\Expr\PostDec;
@@ -18,39 +17,42 @@ class AdminPostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
 
-        $posts=post::all();
-        return view('admin.posts.index',compact('posts'));
+        $posts = post::all();
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
 //        return view('admin.posts.create');
-
-        $category=postCategory::pluck('category_type','id')->all();
-        return view('admin.posts.create',compact('category'));
-
+        if ((Auth::user() != null)) {
+            $category = postCategory::pluck('category_type', 'id')->all();
+            return view('admin.posts.create', compact('category'));
+        } else {
+            $posts = post::all();
+            return view('admin.posts.index', compact('posts'));
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(PostCreateRequest $request)
     {
         $input = $request->all();
-        if((Auth::user()!=null) ) {
+        if ((Auth::user() != null)) {
 
             if ($file = $request->file('photo_id')) {
 
@@ -70,8 +72,8 @@ class AdminPostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function show($id)
     {
@@ -81,8 +83,8 @@ class AdminPostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function edit($id)
     {
@@ -90,7 +92,7 @@ class AdminPostController extends Controller
         $posts = post::findOrFail($id);
 
 //        dd(Auth::user());
-        if((Auth::user()!=null) and ($posts->users_id==Auth::user()->id)) {
+        if ((Auth::user() != null) and ($posts->users_id == Auth::user()->id)) {
             $category = postCategory::pluck('category_type', 'id')->all();
             return view('admin.posts.edit', compact('posts', 'category'));
         }
@@ -102,21 +104,21 @@ class AdminPostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function update(Request $request, $id)
     {
         $post = post::findOrFail($id);
 
         $input = $request->all();
-        if($file=$request->file('photo_id')){
+        if ($file = $request->file('photo_id')) {
 
-            $name=time() . $file->getClientOriginalName();
-            $file->move('images',$name);
-            $photo=Photo::create(['file'=>$name]);
-            $input['photo_id']=$photo->id;
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file' => $name]);
+            $input['photo_id'] = $photo->id;
         }
         $post->update($input);
         $post->price = $input['price'];
@@ -129,12 +131,12 @@ class AdminPostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy($id)
     {
-        $post=post::findOrFail($id);
+        $post = post::findOrFail($id);
         unlink(public_path() . $post->photo->file);
         $post->delete();
         return redirect('/admin/posts');
